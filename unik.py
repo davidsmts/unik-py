@@ -6,7 +6,7 @@ import os.path as op
 import misc
 import unique_kmers
 import count_correction as cc
-import clust
+import cluster as clust
 
 
 def build_hashmaps(all_seqs, all_startposis, profile):
@@ -55,7 +55,7 @@ def unik(files, target_directory, has_reads=False, kmer_profile="111111011011010
         full_seqs = []
         for filename in files:
             reads, _ = misc.read_fasta(filename)
-            full_seqs.append(reads)
+            full_seqs += reads
 
         for seq in full_seqs:
             reads, startposis = misc.get_reads_from(seq, read_len=250, cov=20)

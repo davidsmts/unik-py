@@ -33,7 +33,7 @@ def parse_nucleotides(sequence):
 
 
 def read_fasta(filename):
-    fasta_sequences = SeqIO.parse(open(filename),'fasta')
+    fasta_sequences = SeqIO.parse(open(filename), 'fasta')
     reads = []
     headers = []
     for fasta in fasta_sequences:

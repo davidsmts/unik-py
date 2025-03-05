@@ -15,6 +15,10 @@ def get_reads_from(seq, read_len=200, cov=5):
     return reads, startposis
 
 
+def get_kmer_asint(arr):
+    return int(''.join(str(digit) for digit in arr))
+
+
 def parse_nucleotides(sequence):
     new_seq = []
     map_to_vals_L = {"A": 1, "C": 2, "G": 3, "T":4}
@@ -24,7 +28,7 @@ def parse_nucleotides(sequence):
             new_seq.append(map_to_vals_L[symbol])
         else:
             new_seq.append(map_to_vals_S[symbol])
-        
+    
     return new_seq
 
 

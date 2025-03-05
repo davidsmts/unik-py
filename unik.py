@@ -11,6 +11,7 @@ import clust
 
 def build_hashmaps(all_seqs, all_startposis, profile):
     # BUILD THE HASHMAP
+    f = len(profile)
     starts = {}
     ends = {}
     first_appearance = {}
@@ -20,7 +21,7 @@ def build_hashmaps(all_seqs, all_startposis, profile):
         for i in range(len(sequence) - f +1):
             spaced_kmer = sequence[i:i+f] * profile
             spaced_kmer = spaced_kmer[spaced_kmer != 0]
-            s = ''.join(str(x) for x in spaced_kmer)
+            s = misc.get_kmer_asint(spaced_kmer)
             seqs_kmers[s] = seqs_kmers.get(s, 0) + 1
             
             if i == 0 or i == len(sequence)-f:

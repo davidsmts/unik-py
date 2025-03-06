@@ -1,6 +1,7 @@
 import misc
 import numpy as np
 import sys
+import mmh3
 
 def get_candidates(seq, unique_positions, profile):
     candidates = []
@@ -51,8 +52,8 @@ def compute_unique_kmers(all_seqs, all_raw, all_corr_counts, profile):
         hashed = []
         for candidate in candidates:
             #tohash = ''.join([str(el) for el in candidate])
-            tohash = ''.join([str(el) for el in candidate])
-            hashed.append(mmh3.hash(tohash))
+            #tohash = misc.
+            hashed.append(mmh3.hash(candidate))
         sorted_indices = np.argsort(hashed)
         representatives = np.take_along_axis(np.array(candidates), sorted_indices, axis=0)
         for repres in representatives:

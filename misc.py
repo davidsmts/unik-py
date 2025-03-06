@@ -60,5 +60,5 @@ def save_clusters(clusters, all_reads):
         files.append(filename)
         with open(filename, "w") as file:
             for ID in read_ids:
-                file.write(">id: "+str(ID)+"\n")
+                file.write(">"+str(ID)+"\n")
                 file.write("".join(all_reads[ID]) + "\n")      

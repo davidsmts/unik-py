@@ -15,8 +15,11 @@ def get_reads_from(seq, read_len=200, cov=5):
     return reads, startposis
 
 
-def get_kmer_asint(arr):
-    return int(''.join(str(digit) for digit in arr))
+def get_skmer(sequence, profile):
+    spaced_kmer = sequence * profile
+    spaced_kmer = spaced_kmer[spaced_kmer != 0]
+    s = int(''.join(str(x) for x in spaced_kmer))
+    return s
 
 
 def parse_nucleotides(sequence):

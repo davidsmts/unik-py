@@ -1,15 +1,12 @@
-
-def get_skmer(sequence, profile):
-    spaced_kmer = sequence * profile
-    spaced_kmer = spaced_kmer[spaced_kmer != 0]
-    s = ''.join(str(x) for x in spaced_kmer)
-    return s
+import misc
+import numpy as np
+import sys
 
 def get_candidates(seq, unique_positions, profile):
     candidates = []
     candidate_pos = []
     for pos in unique_positions:
-        candidates.append(get_skmer(seq[pos:pos+len(profile)], profile))
+        candidates.append(misc.get_skmer(seq[pos:pos+len(profile)], profile))
         candidate_pos.append(pos)
     return candidates, candidate_pos
 
@@ -24,8 +21,7 @@ def get_unique_kmers_from_read(k, kcorr, L=250, f=40, smin=0, delta=1):
         if kcorr[i-1] - kcorr[i] >= smin and kcorr[i-1] < uniq_cov and smin <= k[i-1]:
             uniq_cov = k[i]
             nonuniq_cov = kcorr[i-1]
-    #print(uniq_cov)
-    #print(nonuniq_cov)
+
     uniques = []
     for i in range(L-f+1):
         if nonuniq_cov == 0 or (k[i] <= uniq_cov + np.sqrt(delta*uniq_cov) and kcorr[i] <= nonuniq_cov - smin and k[i] >= smin):

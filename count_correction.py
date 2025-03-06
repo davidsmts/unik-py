@@ -1,3 +1,4 @@
+import misc
 
 
 def count_correction(target, starts, ends, hashmap, profile):
@@ -11,9 +12,8 @@ def count_correction(target, starts, ends, hashmap, profile):
     # create all sk-mers
     skmers = []
     for i in range(len(target)-f+1):
-        spaced_kmer = target[i:i+f] * profile
-        spaced_kmer = spaced_kmer[spaced_kmer != 0]
-        skmers.append(''.join(str(x) for x in spaced_kmer))
+        skmer = misc.get_skmer(target[i:i+f], profile)
+        skmers.append(skmer)
         
     for i in range(len(target)-f+1):
         K_i = skmers[i]

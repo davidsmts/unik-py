@@ -19,21 +19,19 @@ def build_hashmaps(all_seqs, all_startposis, profile):
     print("Building hashmap")
     for (index, sequence) in zip(range(len(all_seqs)), all_seqs):
         for i in range(len(sequence) - f +1):
-            spaced_kmer = sequence[i:i+f] * profile
-            spaced_kmer = spaced_kmer[spaced_kmer != 0]
-            s = misc.get_kmer_asint(spaced_kmer)
-            seqs_kmers[s] = seqs_kmers.get(s, 0) + 1
+            skmer = misc.get_skmer(sequence[i:i+f], profile)
+            seqs_kmers[skmer] = seqs_kmers.get(skmer, 0) + 1
             
             if i == 0 or i == len(sequence)-f:
                 #solid_kmer = sequence[i:i+f]
                 addon = 0
                 if i == 0:
-                    starts[s] = starts.get(s, 0) + 1
+                    starts[skmer] = starts.get(skmer, 0) + 1
                 else: 
-                    ends[s] = ends.get(s, 0) + 1
+                    ends[skmer] = ends.get(skmer, 0) + 1
 
-            if s not in first_appearance:
-                first_appearance[s] = all_startposis[index]
+            if skmer not in first_appearance:
+                first_appearance[skmer] = all_startposis[index]
     return seqs_kmers, first_appearance, starts, ends
 
 

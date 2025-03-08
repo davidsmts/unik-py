@@ -50,19 +50,20 @@ def compute_unique_kmers(all_seqs, all_raw, all_corr_counts, profile):
         seq = all_seqs[i]
         candidates, _ = get_candidates(seq, posis, profile)
         hashed = []
-        for candidate in candidates:
+        #for candidate in candidates:
             #tohash = ''.join([str(el) for el in candidate])
             #tohash = misc.
-            hashed.append(mmh3.hash(candidate))
-        sorted_indices = np.argsort(hashed)
-        representatives = np.take_along_axis(np.array(candidates), sorted_indices, axis=0)
+            #hashed.append(mmh3.hash(candidate.to_bytes(24)))
+        #sorted_indices = np.argsort(hashed)
+        #representatives = np.take_along_axis(np.array(candidates), sorted_indices, axis=0)
+        representatives = candidates
         for repres in representatives:
-            unique_kmers.append([i, str(repres)])
+            unique_kmers.append([i, repres])
         debug_unique_kmers.append([i, posis])
     #print(candidates)
     print(unique_kmers[:10])
     print(cnt)
-    print(cnt / len(all_raw))
+    #print(cnt / len(all_raw))
     return unique_kmers
 
 

@@ -46,7 +46,7 @@ def read_fasta(filename):
     return reads, headers
 
 
-def save_clusters(clusters, all_reads):
+def save_clusters(clusters, all_reads, target_dir):
     clustered_reads = {}
     for (i, el) in zip(range(len(clusters)), clusters):
         if el not in clustered_reads:
@@ -56,7 +56,7 @@ def save_clusters(clusters, all_reads):
     files = []
     for key in clustered_reads.keys():
         read_ids = clustered_reads[key]
-        filename = "../data/clusters_CAMI2/"+str(key)+".fasta"
+        filename = target_dir+str(key)+".fasta"
         files.append(filename)
         with open(filename, "w") as file:
             for ID in read_ids:

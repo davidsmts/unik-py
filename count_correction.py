@@ -26,13 +26,19 @@ def count_correction(target, starts, ends, hashmap, profile):
             K_j = skmers[j]
             #c_K_j = hashmap[K_j]
             #if j != max(i-f+1, 0):
-            startcount += starts.get(K_j, 0)
+            startval = 0
+            if K_j in starts:
+                startval = starts[K_j]
+            startcount += startval
             if j != i:
-                endcount += ends.get(K_j, 0)
+                endval = 0
+                if K_j in ends:
+                    endval = ends[K_j]
+                endcount += endval
         k_dash_i = c_K_i - startcount + endcount
         corrected_counts.append(k_dash_i)
     raw_counts = []
-    
+
     return counts, corrected_counts
 
 

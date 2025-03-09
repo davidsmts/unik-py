@@ -86,9 +86,10 @@ def unik(files, target_directory, has_reads=False, kmer_profile="111111011011010
     seqs_kmers, first_appearance, starts, ends = build_hashmaps(all_seqs, all_startposis, profile)
     misc.save_dicts(tardir + "hashmaps", [seqs_kmers, first_appearance, starts, ends])
     all_raw, all_cc = cc.compute_counts(all_seqs, starts, ends, seqs_kmers, profile)
-    #misc.save_arrs(tardir + "profiles", [all_raw, all_cc])
+    #np.savetxt(tardir + "allraw.csv", np.array(all_raw), delimiter=",")
+    #np.savetxt(tardir + "allcc.csv", np.array(all_cc), delimiter=",")
     uk = unique_kmers.compute_unique_kmers(all_seqs, all_raw, all_cc, profile)
-    #misc.save_arrs(tardir + "uk", [uk])
+    np.save(tardir + "uk.npy", uk)
     clusterIDs, counts, _ = clust.cluster(uk, len(all_seqs), first_appearance)
     misc.save_clusters(clusterIDs, all_reads, target_directory)
     

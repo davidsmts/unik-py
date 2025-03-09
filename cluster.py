@@ -46,7 +46,9 @@ def cluster(unique_kmers, num_reads, startposis):
     idx0 = 0
     prev = 0
     while idx0 < len(sortedarr):
-        #print("idx0 = " + str(idx0))
+        if idx0 - prev > len(sortedarr) * 0.1:
+            print("clust progress: " + str(idx0 / len(sortedarr)) + "%")
+            prev = idx0
         curr_kmer = sortedarr[idx0][1]
         indices = [sortedarr[idx0][0]]
         idx1 = idx0 + 1
@@ -70,7 +72,6 @@ def cluster(unique_kmers, num_reads, startposis):
             clusterIDs[id] = minID
     
         idx0 = idx1
-        prev = idx0
     
     #print(clusterIDs[:1000])
     clusterIDs = followToLocalMinimum([i for i in range(num_reads)], clusterIDs)

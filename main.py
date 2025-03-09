@@ -1,6 +1,7 @@
 import argparse
 import unik
 import assembler
+import os
 
 parser = argparse.ArgumentParser(description='Python version of Unik metagenome assembler')
 
@@ -17,8 +18,19 @@ parser.add_argument('--hasreads', action='store_true', help='Flag indicating wet
 
 args = parser.parse_args()
 
+files = []
+if os.path.isdir(args.source):
+    for file in os.listdir(args.source):
+        #print(args.source + file)
+        if os.path.isfile(args.source + file):
+            files.append(args.source + file)
+else:
+    files = [args.source]
+
+print(files)
+
 if args.mode == "cluster":
-    unik.unik([args.source], args.target_dir, has_reads=args.hasreads)
+    unik.unik(files, args.target_dir, has_reads=args.hasreads)
 elif args.mode == "assemble":
     assembler.spades_assembly_fromclustfiles(args.source)
 elif args.mode == "align":

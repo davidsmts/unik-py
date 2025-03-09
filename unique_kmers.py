@@ -40,7 +40,7 @@ def compute_unique_kmers(all_seqs, all_raw, all_corr_counts, profile):
     for i in range(len(all_raw)):
         if i%10000 == 0:
             print(i)
-        posis = get_unique_kmers_from_read(all_raw[i], all_corr_counts[i], L=250, f=40, smin=2, delta=2)
+        posis = get_unique_kmers_from_read(all_raw[i], all_corr_counts[i], L=len(all_seqs[i]), f=40, smin=2, delta=2)
         if posis == []:
             print("Empty!")
             print(i)

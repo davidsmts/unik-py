@@ -1,6 +1,6 @@
 from Bio import SeqIO
 import numpy as np
-
+import time
 
 def get_reads_from(seq, read_len=200, cov=5):
     L = len(seq)
@@ -18,8 +18,11 @@ def get_reads_from(seq, read_len=200, cov=5):
 def get_skmer(sequence, profile):
     spaced_kmer = sequence * profile
     spaced_kmer = spaced_kmer[spaced_kmer != 0]
-    s = int(''.join(str(x) for x in spaced_kmer))
-    return s
+    powerarr = 10**np.arange(0,len(spaced_kmer))
+    dec_arr = spaced_kmer * powerarr
+    #s = int(''.join(str(x) for x in spaced_kmer))
+    s = np.sum(dec_arr)
+    return int(s)
 
 
 def parse_nucleotides(sequence):
@@ -62,3 +65,11 @@ def save_clusters(clusters, all_reads, target_dir):
             for ID in read_ids:
                 file.write(">"+str(ID)+"\n")
                 file.write("".join(all_reads[ID]) + "\n")      
+
+def save_dicts(filename, dicts):
+    for (i, d) in zip(range(len(dicts)), dicts):
+        np.save(filename + "_" + str(i) + ".npy", d)
+
+def save_arrs(filename, arrs):
+    for (i, d) in zip(range(len(arrs)), arrs):
+        np.save(filename + "_" + str(i) + ".npy", d)

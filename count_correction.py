@@ -32,7 +32,7 @@ def count_correction(target, starts, ends, hashmap, profile):
         k_dash_i = c_K_i - startcount + endcount
         corrected_counts.append(k_dash_i)
     raw_counts = []
-
+    
     return counts, corrected_counts
 
 

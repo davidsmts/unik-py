@@ -50,12 +50,14 @@ def cluster(unique_kmers, num_reads, startposis):
         curr_kmer = sortedarr[idx0][1]
         indices = [sortedarr[idx0][0]]
         idx1 = idx0 + 1
+        if idx1 >= len(sortedarr):
+            break
         while sortedarr[idx1][1] == curr_kmer:
             indices.append(sortedarr[idx1][0])
             # erste k-mer occurence nehmen
-            if np.abs(startposis[sortedarr[idx0][1]] - startposis[sortedarr[idx1][1]]) > 220:
-                #print("Potential missassembly in reads " + str(sortedarr[idx0][0]) + "-" + str(sortedarr[idx1][0]) + " with read starts " + str(startposis[sortedarr[idx0][0]]) + ";" + str(startposis[sortedarr[idx1][0]]))
-                reads_.append((sortedarr[idx0][0],sortedarr[idx1][0]))
+            if len(list(startposis.keys())) > 0:
+                if np.abs(startposis[sortedarr[idx0][1]] - startposis[sortedarr[idx1][1]]) > 220:
+                    reads_.append((sortedarr[idx0][0],sortedarr[idx1][0]))
             idx1 += 1
             if idx1 == len(sortedarr):
                 break

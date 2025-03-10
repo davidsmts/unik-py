@@ -46,6 +46,8 @@ def cluster(unique_kmers, num_reads, startposis):
     idx0 = 0
     prev = 0
     while idx0 < len(sortedarr):
+        if idx0 % 1000 == 0:
+            print(idx0)
         if idx0 - prev > len(sortedarr) * 0.1:
             print("clust progress: " + str(100* np.round(idx0 / len(sortedarr))) + "%")
             prev = idx0

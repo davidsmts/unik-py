@@ -20,9 +20,10 @@ def get_skmer(sequence, profile):
     spaced_kmer = spaced_kmer[spaced_kmer != 0]
     mapping = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
     packed = 0
-    for char in spaced_kmer:
-        packed = (packed << 2) | mapping[char]  # Shift left by 2 bits and add the mapped number
-    return (packed,)
+    for symb in spaced_kmer:
+        #print(symb)
+        packed = (packed << 2) | symb  # Shift left by 2 bits and add the mapped number
+    return packed
 
 
 def parse_nucleotides(sequence):

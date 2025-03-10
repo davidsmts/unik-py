@@ -80,7 +80,6 @@ def unik(files, target_directory, has_reads=False, kmer_profile="111111011011010
     for i in range(len(all_reads)):
         seq = misc.parse_nucleotides(all_reads[i])
         all_seqs.append(seq)
-    print(len(all_seqs))
 
     timestamp = time.time()
     tardir = "./tmp/" + str(timestamp) + "/"

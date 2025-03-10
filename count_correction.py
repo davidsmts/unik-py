@@ -1,5 +1,5 @@
 import misc
-
+import numpy as np
 
 def count_correction(target, starts, ends, hashmap, profile):
     f = len(profile)
@@ -48,7 +48,7 @@ def compute_counts(all_seqs, starts, ends, seqs_kmers, profile):
     all_raw = []
     for j in range(len(all_seqs)):
         if j%10000 == 0:
-            print(j)
+            print("count correction progress: " + str(np.round(100*j/len(all_seqs))) + "%")
         target = all_seqs[j]
         raw, corr_counts = count_correction(target, starts, ends, seqs_kmers, profile)
         all_raw.append(raw)

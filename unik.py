@@ -23,7 +23,7 @@ def build_hashmaps(all_seqs, all_startposis, profile):
     for (index, sequence) in zip(range(len(all_seqs)), all_seqs):
         if index-prev_index > len(all_seqs)*0.1:
             prev_index = index
-            print(index)
+            print("hashmap progress: " + str(np.round(100*index/len(all_seqs))) + "%")
         for i in range(len(sequence) - f +1):
             skmer = misc.get_skmer(sequence[i:i+f], profile)
             seqs_kmers[skmer] = seqs_kmers.get(skmer, 0) + 1
@@ -65,11 +65,12 @@ def unik(files, target_directory, has_reads=False, kmer_profile="111111011011010
     else:
         full_seqs = []
         for filename in files:
-            reads, _ = misc.read_fasta(filename)
-            full_seqs += reads
+            if filename != ".DS_Store":
+                reads, _ = misc.read_fasta(filename)
+                full_seqs += reads
 
         for seq in full_seqs:
-            reads, startposis = misc.get_reads_from(seq, read_len=250, cov=20)
+            reads, startposis = misc.get_reads_from(seq, read_len=250, cov=7)
             all_reads = all_reads + reads
             all_read_arr.append(reads)
             all_startposis = all_startposis + startposis
@@ -79,6 +80,7 @@ def unik(files, target_directory, has_reads=False, kmer_profile="111111011011010
     for i in range(len(all_reads)):
         seq = misc.parse_nucleotides(all_reads[i])
         all_seqs.append(seq)
+    print(len(all_seqs))
 
     timestamp = time.time()
     tardir = "./tmp/" + str(timestamp) + "/"

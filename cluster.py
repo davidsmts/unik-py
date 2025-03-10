@@ -47,13 +47,13 @@ def cluster(unique_kmers, num_reads, startposis):
     prev = 0
     while idx0 < len(sortedarr):
         if idx0 - prev > len(sortedarr) * 0.1:
-            print("clust progress: " + str(idx0 / len(sortedarr)) + "%")
+            print("clust progress: " + str(100* np.round(idx0 / len(sortedarr))) + "%")
             prev = idx0
         curr_kmer = sortedarr[idx0][1]
         indices = [sortedarr[idx0][0]]
         idx1 = idx0 + 1
-        if idx1 >= len(sortedarr):
-            break
+        #if idx1 >= len(sortedarr):
+        #    break
         while sortedarr[idx1][1] == curr_kmer:
             indices.append(sortedarr[idx1][0])
             # erste k-mer occurence nehmen

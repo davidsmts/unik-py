@@ -18,11 +18,11 @@ def get_reads_from(seq, read_len=200, cov=5):
 def get_skmer(sequence, profile):
     spaced_kmer = sequence * profile
     spaced_kmer = spaced_kmer[spaced_kmer != 0]
-    powerarr = 10**np.arange(0,len(spaced_kmer))
-    dec_arr = spaced_kmer * powerarr
-    #s = int(''.join(str(x) for x in spaced_kmer))
-    s = np.sum(dec_arr)
-    return int(s)
+    mapping = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
+    packed = 0
+    for char in spaced_kmer:
+        packed = (packed << 2) | mapping[char]  # Shift left by 2 bits and add the mapped number
+    return (packed,)
 
 
 def parse_nucleotides(sequence):

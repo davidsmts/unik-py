@@ -2,7 +2,7 @@
 .DS_Store
 .png
 data/
-.txt
+#.txt
 tmp/*
 tmp_p/*
 */tmp_p/*
@@ -12,7 +12,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.fas
-*.txt
+#*.txt
 *.fasta
 *.wig
 *.bt2

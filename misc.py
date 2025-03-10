@@ -18,12 +18,17 @@ def get_reads_from(seq, read_len=200, cov=5):
 def get_skmer(sequence, profile):
     spaced_kmer = sequence * profile
     spaced_kmer = spaced_kmer[spaced_kmer != 0]
-    mapping = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
+    #mapping = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
     packed = 0
     for symb in spaced_kmer:
         #print(symb)
-        packed = (packed << 2) | symb  # Shift left by 2 bits and add the mapped number
+        packed = (packed << 3) | symb  # Shift left by 2 bits and add the mapped number
     return packed
+
+def _get_skmer(sequence, profile):
+    spaced_kmer = sequence * profile
+    spaced_kmer = spaced_kmer[spaced_kmer != 0]
+    return ''.join([str(s) for s in spaced_kmer])
 
 
 def parse_nucleotides(sequence):

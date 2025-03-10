@@ -1,0 +1,4 @@
+numpy
+mmh3
+matplotlib
+Bio

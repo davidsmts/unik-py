@@ -70,7 +70,7 @@ def unik(files, target_directory, has_reads=False, kmer_profile="111111011011010
                 full_seqs += reads
 
         for seq in full_seqs:
-            reads, startposis = misc.get_reads_from(seq, read_len=250, cov=7)
+            reads, startposis = misc.get_reads_from(seq, read_len=250, cov=5)
             all_reads = all_reads + reads
             all_read_arr.append(reads)
             all_startposis = all_startposis + startposis

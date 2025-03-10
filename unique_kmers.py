@@ -41,9 +41,9 @@ def compute_unique_kmers(all_seqs, all_raw, all_corr_counts, profile):
         if i%10000 == 0:
             print(i)
         posis = get_unique_kmers_from_read(all_raw[i], all_corr_counts[i], L=len(all_seqs[i]), f=40, smin=2, delta=2)
-        if posis == []:
-            print("Empty!")
-            print(i)
+        #if posis == []:
+            #print("Empty!")
+            #print(i)
             
         if posis != [j for j in range(len(all_raw[i])-39)]:
             cnt += 1
@@ -51,16 +51,13 @@ def compute_unique_kmers(all_seqs, all_raw, all_corr_counts, profile):
         candidates, _ = get_candidates(seq, posis, profile)
         hashed = []
         for candidate in candidates:
-            #tohash = ''.join([str(el) for el in candidate])
-            #tohash = misc.
-            #print(candidate)
             hashed.append(mmh3.hash(str(candidate)))
         sorted_indices = np.argsort(hashed)
         representatives = np.take_along_axis(np.array(candidates), sorted_indices, axis=0)
-        #representatives = candidates
+        representatives = representatives[:m]
         for repres in representatives:
-            unique_kmers.append([i, int(repres)])
-        debug_unique_kmers.append([i, int(posis)])
+            unique_kmers.append([i, repres])
+        debug_unique_kmers.append([i, posis])
     #print(candidates)
     print(unique_kmers[:10])
     print(cnt)
